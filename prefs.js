@@ -80,7 +80,8 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // suppress-activation-when-button-held
         const suppressWhenButtonHeldRow = new Adw.ExpanderRow({
-            title: "Don't activate when a mouse button is held",
+            title: "Suppress on mouse button",
+            subtitle: "Don't activate overview while a mouse button is held",
             show_enable_switch: true,
         });
         settings.bind(
@@ -93,7 +94,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // suppress-activation-when-button-held-left
         const suppressWhenButtonHeldLeftRow = new Adw.SwitchRow({
-            title: "Left Mouse Button",
+            title: "Left mouse button",
         });
         settings.bind(
             "suppress-activation-when-button-held-left",
@@ -105,7 +106,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // suppress-activation-when-button-held-right
         const suppressWhenButtonHeldRightRow = new Adw.SwitchRow({
-            title: "Right Mouse Button",
+            title: "Right mouse button",
         });
         settings.bind(
             "suppress-activation-when-button-held-right",
@@ -117,7 +118,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // suppress-activation-when-button-held-middle
         const suppressWhenButtonHeldMiddleRow = new Adw.SwitchRow({
-            title: "Middle Mouse Button",
+            title: "Middle mouse button",
         });
         settings.bind(
             "suppress-activation-when-button-held-middle",
@@ -129,7 +130,8 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // suppress-activation-when-fullscreen
         const suppressWhenFullscreenRow = new Adw.SwitchRow({
-            title: "Don't activate when an application is fullscreen",
+            title: "Suppress on fullscreen",
+            subtitle: "Don't activate overview while an application is displayed in fullscreen mode",
         });
         settings.bind(
             "suppress-activation-when-fullscreen",
