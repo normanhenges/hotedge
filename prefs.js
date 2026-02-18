@@ -32,15 +32,45 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         });
         window.add(page);
 
+        const positionGroup = new Adw.PreferencesGroup({
+            title: "Position",
+        });
+        page.add(positionGroup);
+
         const behaviorGroup = new Adw.PreferencesGroup({
             title: "Behavior",
         });
         page.add(behaviorGroup);
 
+        const appearanceGroup = new Adw.PreferencesGroup({
+            title: "Appearance",
+        });
+        page.add(appearanceGroup);
+
+        // edge-size
+        const edgeSizeRow = new Adw.SpinRow({
+            title: "Edge size",
+            subtitle: "% of display width",
+            adjustment: new Gtk.Adjustment({
+                lower: 1,
+                upper: 100,
+                step_increment: 10,
+            }),
+        });
+        settings.bind("edge-size", edgeSizeRow, "value", Gio.SettingsBindFlags.DEFAULT);
+        positionGroup.add(edgeSizeRow);
+
+        // primary-monitor-only
+        const primaryMonitorOnlyRow = new Adw.SwitchRow({
+            title: "Only on primary monitor",
+        });
+        settings.bind("primary-monitor-only", primaryMonitorOnlyRow, "active", Gio.SettingsBindFlags.DEFAULT);
+        positionGroup.add(primaryMonitorOnlyRow);
+
         if (settings.get_boolean("fallback-in-use")) {
             // fallback-timeout
             const timeoutRow = new Adw.SpinRow({
-                title: "Activation Timeout",
+                title: "Activation timeout",
                 subtitle: "milliseconds",
                 adjustment: new Gtk.Adjustment({
                     lower: 0,
@@ -53,7 +83,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         } else {
             // pressure-threshold
             const pressureRow = new Adw.SpinRow({
-                title: "Activation Pressure",
+                title: "Activation pressure",
                 subtitle: "pixels",
                 adjustment: new Gtk.Adjustment({
                     lower: 0,
@@ -64,19 +94,6 @@ export default class HotEdgePreferences extends ExtensionPreferences {
             settings.bind("pressure-threshold", pressureRow, "value", Gio.SettingsBindFlags.DEFAULT);
             behaviorGroup.add(pressureRow);
         }
-
-        // edge-size
-        const edgeSizeRow = new Adw.SpinRow({
-            title: "Edge Size",
-            subtitle: "% of display width",
-            adjustment: new Gtk.Adjustment({
-                lower: 1,
-                upper: 100,
-                step_increment: 10,
-            }),
-        });
-        settings.bind("edge-size", edgeSizeRow, "value", Gio.SettingsBindFlags.DEFAULT);
-        behaviorGroup.add(edgeSizeRow);
 
         // suppress-activation-when-button-held
         const suppressWhenButtonHeldRow = new Adw.ExpanderRow({
@@ -141,18 +158,11 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         );
         behaviorGroup.add(suppressWhenFullscreenRow);
 
-        // primary-monitor-only
-        const primaryMonitorOnlyRow = new Adw.SwitchRow({
-            title: "Hot edge only on the primary monitor",
-        });
-        settings.bind("primary-monitor-only", primaryMonitorOnlyRow, "active", Gio.SettingsBindFlags.DEFAULT);
-        behaviorGroup.add(primaryMonitorOnlyRow);
-
         // show-animation
         const showAnimationRow = new Adw.SwitchRow({
             title: "Show animation when hot edge is activated",
         });
         settings.bind("show-animation", showAnimationRow, "active", Gio.SettingsBindFlags.DEFAULT);
-        behaviorGroup.add(showAnimationRow);
+        appearanceGroup.add(showAnimationRow);
     }
 }
