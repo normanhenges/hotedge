@@ -129,13 +129,13 @@ const HotEdge = GObject.registerClass(
             this._edgeSize = this._settings.get_uint("edge-size") / 100;
 
             this._suppressActivationWhenButtonHeld = this._settings.get_boolean("suppress-activation-when-button-held");
-            this._suppressActivationWhenButtonHeldLeft = this._settings.get_boolean("suppress-activation-when-button-held-left");
-            this._suppressActivationWhenButtonHeldRight = this._settings.get_boolean("suppress-activation-when-button-held-right");
-            this._suppressActivationWhenButtonHeldMiddle = this._settings.get_boolean("suppress-activation-when-button-held-middle");
+            this._suppressButtonOptionLeft = this._settings.get_boolean("suppress-button-option-left");
+            this._suppressButtonOptionRight = this._settings.get_boolean("suppress-button-option-right");
+            this._suppressButtonOptionMiddle = this._settings.get_boolean("suppress-button-option-middle");
             this._ignoredButtons = [];
-            if (this._suppressActivationWhenButtonHeldLeft) this._ignoredButtons.push(Clutter.ModifierType.BUTTON1_MASK);
-            if (this._suppressActivationWhenButtonHeldRight) this._ignoredButtons.push(Clutter.ModifierType.BUTTON2_MASK);
-            if (this._suppressActivationWhenButtonHeldMiddle) this._ignoredButtons.push(Clutter.ModifierType.BUTTON3_MASK);
+            if (this._suppressButtonOptionLeft) this._ignoredButtons.push(Clutter.ModifierType.BUTTON1_MASK);
+            if (this._suppressButtonOptionRight) this._ignoredButtons.push(Clutter.ModifierType.BUTTON2_MASK);
+            if (this._suppressButtonOptionMiddle) this._ignoredButtons.push(Clutter.ModifierType.BUTTON3_MASK);
 
             this._suppressActivationWhenFullscreen = this._settings.get_boolean("suppress-activation-when-fullscreen");
             this._showAnimation = this._settings.get_boolean("show-animation");
