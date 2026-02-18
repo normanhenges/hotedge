@@ -127,7 +127,16 @@ const HotEdge = GObject.registerClass(
             this._settings = settings;
             this._fallbackTimeout = this._settings.get_uint("fallback-timeout");
             this._edgeSize = this._settings.get_uint("edge-size") / 100;
+
             this._suppressActivationWhenButtonHeld = this._settings.get_boolean("suppress-activation-when-button-held");
+            this._suppressActivationWhenButtonHeldLeft = this._settings.get_boolean("suppress-activation-when-button-held-left");
+            this._suppressActivationWhenButtonHeldRight = this._settings.get_boolean("suppress-activation-when-button-held-right");
+            this._suppressActivationWhenButtonHeldMiddle = this._settings.get_boolean("suppress-activation-when-button-held-middle");
+            this._ignoredButtons = [];
+            if (this._suppressActivationWhenButtonHeldLeft) this._ignoredButtons.push(Clutter.ModifierType.BUTTON1_MASK);
+            if (this._suppressActivationWhenButtonHeldRight) this._ignoredButtons.push(Clutter.ModifierType.BUTTON2_MASK);
+            if (this._suppressActivationWhenButtonHeldMiddle) this._ignoredButtons.push(Clutter.ModifierType.BUTTON3_MASK);
+
             this._suppressActivationWhenFullscreen = this._settings.get_boolean("suppress-activation-when-fullscreen");
             this._showAnimation = this._settings.get_boolean("show-animation");
 
@@ -142,12 +151,6 @@ const HotEdge = GObject.registerClass(
             this._pressureBarrier.connect("trigger", this._toggleOverview.bind(this));
             this._ripples = new Ripples.Ripples(0.5, 0.5, "ripple-centered");
             this._ripples.addTo(layoutManager.uiGroup);
-
-            this._ignoredButtons = [
-                Clutter.ModifierType.BUTTON1_MASK,
-                Clutter.ModifierType.BUTTON2_MASK,
-                Clutter.ModifierType.BUTTON3_MASK,
-            ]
 
             this.connect("destroy", this._onDestroy.bind(this));
         }

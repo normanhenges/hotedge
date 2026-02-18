@@ -90,6 +90,42 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         );
         behaviorGroup.add(suppressWhenButtonHeldRow);
 
+        // suppress-activation-when-button-held-left
+        const suppressWhenButtonHeldLeftRow = new Adw.SwitchRow({
+            title: "Don't activate when the left mouse button is held",
+        });
+        settings.bind(
+            "suppress-activation-when-button-held-left",
+            suppressWhenButtonHeldLeftRow,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        );
+        behaviorGroup.add(suppressWhenButtonHeldLeftRow);
+
+        // suppress-activation-when-button-held-right
+        const suppressWhenButtonHeldRightRow = new Adw.SwitchRow({
+            title: "Don't activate when the right mouse button is held",
+        });
+        settings.bind(
+            "suppress-activation-when-button-held-right",
+            suppressWhenButtonHeldRightRow,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        );
+        behaviorGroup.add(suppressWhenButtonHeldRightRow);
+
+        // suppress-activation-when-button-held-middle
+        const suppressWhenButtonHeldMiddleRow = new Adw.SwitchRow({
+            title: "Don't activate when the middle mouse button is held",
+        });
+        settings.bind(
+            "suppress-activation-when-button-held-middle",
+            suppressWhenButtonHeldMiddleRow,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT,
+        );
+        behaviorGroup.add(suppressWhenButtonHeldMiddleRow);
+
         // suppress-activation-when-fullscreen
         const suppressWhenFullscreenRow = new Adw.SwitchRow({
             title: "Don't activate when an application is fullscreen",
