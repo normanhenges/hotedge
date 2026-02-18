@@ -92,41 +92,41 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         );
         behaviorGroup.add(suppressWhenButtonHeldRow);
 
-        // suppress-activation-when-button-held-left
-        const suppressWhenButtonHeldLeftRow = new Adw.SwitchRow({
+        // suppress-button-option-left
+        const suppressButtonOptionLeft = new Adw.SwitchRow({
             title: "Left mouse button",
         });
         settings.bind(
-            "suppress-activation-when-button-held-left",
-            suppressWhenButtonHeldLeftRow,
+            "suppress-button-option-left",
+            suppressButtonOptionLeft,
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         );
-        suppressWhenButtonHeldRow.add_row(suppressWhenButtonHeldLeftRow);
+        suppressWhenButtonHeldRow.add_row(suppressButtonOptionLeft);
 
-        // suppress-activation-when-button-held-right
-        const suppressWhenButtonHeldRightRow = new Adw.SwitchRow({
+        // suppress-button-option-right
+        const suppressButtonOptionRight = new Adw.SwitchRow({
             title: "Right mouse button",
         });
         settings.bind(
-            "suppress-activation-when-button-held-right",
-            suppressWhenButtonHeldRightRow,
+            "suppress-button-option-right",
+            suppressButtonOptionRight,
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         );
-        suppressWhenButtonHeldRow.add_row(suppressWhenButtonHeldRightRow);
+        suppressWhenButtonHeldRow.add_row(suppressButtonOptionRight);
 
-        // suppress-activation-when-button-held-middle
-        const suppressWhenButtonHeldMiddleRow = new Adw.SwitchRow({
+        // suppress-button-option-middle
+        const suppressButtonOptionMiddle = new Adw.SwitchRow({
             title: "Middle mouse button",
         });
         settings.bind(
-            "suppress-activation-when-button-held-middle",
-            suppressWhenButtonHeldMiddleRow,
+            "suppress-button-option-middle",
+            suppressButtonOptionMiddle,
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         );
-        suppressWhenButtonHeldRow.add_row(suppressWhenButtonHeldMiddleRow);
+        suppressWhenButtonHeldRow.add_row(suppressButtonOptionMiddle);
 
         // suppress-activation-when-fullscreen
         const suppressWhenFullscreenRow = new Adw.SwitchRow({
