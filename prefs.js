@@ -79,8 +79,9 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         behaviorGroup.add(edgeSizeRow);
 
         // suppress-activation-when-button-held
-        const suppressWhenButtonHeldRow = new Adw.SwitchRow({
+        const suppressWhenButtonHeldRow = new Adw.ExpanderRow({
             title: "Don't activate when a mouse button is held",
+            show_enable_switch: true,
         });
         settings.bind(
             "suppress-activation-when-button-held",
@@ -92,7 +93,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // suppress-activation-when-button-held-left
         const suppressWhenButtonHeldLeftRow = new Adw.SwitchRow({
-            title: "Don't activate when the left mouse button is held",
+            title: "Left Mouse Button",
         });
         settings.bind(
             "suppress-activation-when-button-held-left",
@@ -100,11 +101,11 @@ export default class HotEdgePreferences extends ExtensionPreferences {
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         );
-        behaviorGroup.add(suppressWhenButtonHeldLeftRow);
+        suppressWhenButtonHeldRow.add_row(suppressWhenButtonHeldLeftRow);
 
         // suppress-activation-when-button-held-right
         const suppressWhenButtonHeldRightRow = new Adw.SwitchRow({
-            title: "Don't activate when the right mouse button is held",
+            title: "Right Mouse Button",
         });
         settings.bind(
             "suppress-activation-when-button-held-right",
@@ -112,11 +113,11 @@ export default class HotEdgePreferences extends ExtensionPreferences {
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         );
-        behaviorGroup.add(suppressWhenButtonHeldRightRow);
+        suppressWhenButtonHeldRow.add_row(suppressWhenButtonHeldRightRow);
 
         // suppress-activation-when-button-held-middle
         const suppressWhenButtonHeldMiddleRow = new Adw.SwitchRow({
-            title: "Don't activate when the middle mouse button is held",
+            title: "Middle Mouse Button",
         });
         settings.bind(
             "suppress-activation-when-button-held-middle",
@@ -124,7 +125,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
             "active",
             Gio.SettingsBindFlags.DEFAULT,
         );
-        behaviorGroup.add(suppressWhenButtonHeldMiddleRow);
+        suppressWhenButtonHeldRow.add_row(suppressWhenButtonHeldMiddleRow);
 
         // suppress-activation-when-fullscreen
         const suppressWhenFullscreenRow = new Adw.SwitchRow({
