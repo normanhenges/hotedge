@@ -143,6 +143,12 @@ const HotEdge = GObject.registerClass(
             this._ripples = new Ripples.Ripples(0.5, 0.5, "ripple-centered");
             this._ripples.addTo(layoutManager.uiGroup);
 
+            this._ignoredButtons = [
+                Clutter.ModifierType.BUTTON1_MASK,
+                Clutter.ModifierType.BUTTON2_MASK,
+                Clutter.ModifierType.BUTTON3_MASK,
+            ]
+
             this.connect("destroy", this._onDestroy.bind(this));
         }
 
@@ -201,8 +207,11 @@ const HotEdge = GObject.registerClass(
         }
 
         _toggleOverview() {
-            if (this._suppressActivationWhenButtonHeld && global.get_pointer()[2] & Clutter.ModifierType.BUTTON1_MASK) {
-                return;
+            if (this._suppressActivationWhenButtonHeld) {
+                let buttonHeld = this._ignoredButtons.some(button => (global.get_pointer()[2] & button) !== 0);
+                if (buttonHeld) {
+                    return;
+                }
             }
 
             if (this._suppressActivationWhenFullscreen && this._monitor.inFullscreen && !Main.overview.visible) return;
