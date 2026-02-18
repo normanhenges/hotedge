@@ -22,6 +22,18 @@
       <summary>Don't activate the overview when a mouse button is held down.</summary>
       <default>true</default>
     </key>
+    <key name="suppress-activation-when-button-held-left" type="b">
+      <summary>Don't activate the overview when the left mouse button is held down.</summary>
+      <default>true</default>
+    </key>
+    <key name="suppress-activation-when-button-held-right" type="b">
+      <summary>Don't activate the overview when the right mouse button is held down.</summary>
+      <default>true</default>
+    </key>
+    <key name="suppress-activation-when-button-held-middle" type="b">
+      <summary>Don't activate the overview when the middle mouse button is held down.</summary>
+      <default>true</default>
+    </key>
     <key name="suppress-activation-when-fullscreen" type="b">
       <summary>Don't activate the overview if a fullscreen window is focused.</summary>
       <default>true</default>
