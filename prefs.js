@@ -104,7 +104,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         settings.bind(
             "suppress-activation-when-button-held",
             suppressWhenButtonHeldRow,
-            "active",
+            "enable-expansion",
             Gio.SettingsBindFlags.DEFAULT,
         );
         behaviorGroup.add(suppressWhenButtonHeldRow);
