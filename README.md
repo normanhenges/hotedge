@@ -52,7 +52,7 @@ Hot Edge exposes two settings that alter its sensitivity : `pressure-threshold` 
 
 ### suppress-activation-when-button-held
 
-When `suppress-activation-when-button-held` is true the hot edge will not activate when a mouse button is held down. This reduces the chance of accidental activation, but also prevents you from using th ehot edge to open the shell during drag-and-drop operations.
+When `suppress-activation-when-button-held` is true the hot edge will not activate when a mouse button is held down. This reduces the chance of accidental activation, but also prevents you from using the hot edge to open the shell during drag-and-drop operations. When true, `suppress-button-option-left`, `suppress-button-option-right`, and `suppress-button-option-middle` can be used to enable this feature for these mouse buttons individually.
 
 ### suppress-activation-when-fullscreen
  
