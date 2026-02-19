@@ -49,7 +49,6 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         const edgeSizeRow = new Adw.ActionRow({
             title: "Edge Size",
-            subtitle: "% of display width (default is 100 %)",
         });
         edgeSizeRow.add_css_class("spin");
         const edgeSizeBox = new Gtk.Box({
@@ -86,7 +85,6 @@ export default class HotEdgePreferences extends ExtensionPreferences {
             // fallback-timeout
             const timeoutRow = new Adw.ActionRow({
                 title: "Activation Timeout",
-                subtitle: "milliseconds (default is 250 ms)",
             });
             timeoutRow.add_css_class("spin");
             const timeoutBox = new Gtk.Box({
@@ -115,7 +113,6 @@ export default class HotEdgePreferences extends ExtensionPreferences {
             // pressure-threshold
             const pressureRow = new Adw.ActionRow({
                 title: "Activation Pressure",
-                subtitle: "pixels (default is 150 px)",
             });
             pressureRow.add_css_class("spin");
             const pressureBox = new Gtk.Box({
