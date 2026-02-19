@@ -109,6 +109,24 @@ export default class HotEdgePreferences extends ExtensionPreferences {
                 orientation: Gtk.Orientation.HORIZONTAL,
             });
             timeoutRow.add_suffix(timeoutBox);
+            const timeoutResetButton = new Gtk.Button({
+                icon_name: "view-refresh-symbolic",
+                tooltip_text: "Reset to default",
+                valign: Gtk.Align.CENTER,
+                hexpand: false,
+                vexpand: false
+            });
+            timeoutResetButton.add_css_class("flat");
+            timeoutResetButton.connect("clicked", () => {
+                settings.reset("fallback-timeout");
+            });
+            timeoutResetButton.connect("map", () => {
+                timeoutResetButton.visible = settings.get_uint("fallback-timeout") != settings.get_default_value("fallback-timeout").get_uint32();
+            });
+            settings.connect("changed::fallback-timeout", () => {
+                timeoutResetButton.visible = settings.get_uint("fallback-timeout") != settings.get_default_value("fallback-timeout").get_uint32();
+            });
+            timeoutBox.append(timeoutResetButton);
             const timeoutSpinner = new Gtk.SpinButton({
                 adjustment: new Gtk.Adjustment({
                     lower: 0,
@@ -137,6 +155,24 @@ export default class HotEdgePreferences extends ExtensionPreferences {
                 orientation: Gtk.Orientation.HORIZONTAL,
             });
             pressureRow.add_suffix(pressureBox);
+            const pressureResetButton = new Gtk.Button({
+                icon_name: "view-refresh-symbolic",
+                tooltip_text: "Reset to default",
+                valign: Gtk.Align.CENTER,
+                hexpand: false,
+                vexpand: false
+            });
+            pressureResetButton.add_css_class("flat");
+            pressureResetButton.connect("clicked", () => {
+                settings.reset("pressure-threshold");
+            });
+            pressureResetButton.connect("map", () => {
+                pressureResetButton.visible = settings.get_uint("pressure-threshold") != settings.get_default_value("pressure-threshold").get_uint32();
+            });
+            settings.connect("changed::pressure-threshold", () => {
+                pressureResetButton.visible = settings.get_uint("pressure-threshold") != settings.get_default_value("pressure-threshold").get_uint32();
+            });
+            pressureBox.append(pressureResetButton);
             const pressureSpinner = new Gtk.SpinButton({
                 adjustment: new Gtk.Adjustment({
                     lower: 0,
