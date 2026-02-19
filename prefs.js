@@ -49,8 +49,8 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // edge-size
         const edgeSizeRow = new Adw.SpinRow({
-            title: "Edge size",
-            subtitle: "% of display width",
+            title: "Edge Size",
+            subtitle: "% of display width (default is 100 %)",
             adjustment: new Gtk.Adjustment({
                 lower: 1,
                 upper: 100,
@@ -62,7 +62,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // primary-monitor-only
         const primaryMonitorOnlyRow = new Adw.SwitchRow({
-            title: "Only on primary monitor",
+            title: "Only on Primary Monitor",
         });
         settings.bind("primary-monitor-only", primaryMonitorOnlyRow, "active", Gio.SettingsBindFlags.DEFAULT);
         positionGroup.add(primaryMonitorOnlyRow);
@@ -70,8 +70,8 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         if (settings.get_boolean("fallback-in-use")) {
             // fallback-timeout
             const timeoutRow = new Adw.SpinRow({
-                title: "Activation timeout",
-                subtitle: "milliseconds",
+                title: "Activation Timeout",
+                subtitle: "milliseconds (default is 250 ms)",
                 adjustment: new Gtk.Adjustment({
                     lower: 0,
                     upper: 1000,
@@ -83,8 +83,8 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         } else {
             // pressure-threshold
             const pressureRow = new Adw.SpinRow({
-                title: "Activation pressure",
-                subtitle: "pixels",
+                title: "Activation Pressure",
+                subtitle: "pixels (default is 150 px)",
                 adjustment: new Gtk.Adjustment({
                     lower: 0,
                     upper: 500,
@@ -97,7 +97,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // suppress-activation-when-button-held
         const suppressWhenButtonHeldRow = new Adw.ExpanderRow({
-            title: "Suppress on mouse button",
+            title: "Suppress on Mouse Button",
             subtitle: "Don't activate overview while a mouse button is held",
             show_enable_switch: true,
         });
@@ -111,7 +111,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // suppress-button-option-left
         const suppressButtonOptionLeft = new Adw.SwitchRow({
-            title: "Left mouse button",
+            title: "Left Mouse Button",
         });
         settings.bind(
             "suppress-button-option-left",
@@ -123,7 +123,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // suppress-button-option-right
         const suppressButtonOptionRight = new Adw.SwitchRow({
-            title: "Right mouse button",
+            title: "Right Mouse Button",
         });
         settings.bind(
             "suppress-button-option-right",
@@ -135,7 +135,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // suppress-button-option-middle
         const suppressButtonOptionMiddle = new Adw.SwitchRow({
-            title: "Middle mouse button",
+            title: "Middle Mouse Button",
         });
         settings.bind(
             "suppress-button-option-middle",
@@ -147,7 +147,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // suppress-activation-when-fullscreen
         const suppressWhenFullscreenRow = new Adw.SwitchRow({
-            title: "Suppress on fullscreen",
+            title: "Suppress on Fullscreen",
             subtitle: "Don't activate overview while an application is displayed in fullscreen mode",
         });
         settings.bind(
@@ -160,7 +160,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // show-animation
         const showAnimationRow = new Adw.SwitchRow({
-            title: "Show animation when hot edge is activated",
+            title: "Show Animation when Activated",
         });
         settings.bind("show-animation", showAnimationRow, "active", Gio.SettingsBindFlags.DEFAULT);
         appearanceGroup.add(showAnimationRow);
