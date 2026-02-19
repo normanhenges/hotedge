@@ -24,7 +24,7 @@ import { ExtensionPreferences } from "resource:///org/gnome/Shell/Extensions/js/
 
 export default class HotEdgePreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
-        const settings = this.getSettings();
+        this.settings = this.getSettings();
 
         const page = new Adw.PreferencesPage({
             title: "General",
@@ -47,150 +47,37 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         });
         page.add(appearanceGroup);
 
-        const edgeSizeRow = new Adw.ActionRow({
-            title: "Edge Size",
+        // edge-size
+        let edgeSizeAdjustment = new Gtk.Adjustment({
+            lower: 1,
+            upper: 100,
+            step_increment: 10,
         });
-        edgeSizeRow.add_css_class("spin");
-        const edgeSizeBox = new Gtk.Box({
-            orientation: Gtk.Orientation.HORIZONTAL,
-        });
-        edgeSizeRow.add_suffix(edgeSizeBox);
-        const edgeSizeResetButton = new Gtk.Button({
-            icon_name: "view-refresh-symbolic",
-            tooltip_text: "Reset to default",
-            valign: Gtk.Align.CENTER,
-            hexpand: false,
-            vexpand: false
-        });
-        edgeSizeResetButton.add_css_class("flat");
-        edgeSizeResetButton.connect("clicked", () => {
-            settings.reset("edge-size");
-        });
-        edgeSizeResetButton.connect("map", () => {
-            edgeSizeResetButton.visible = settings.get_uint("edge-size") != settings.get_default_value("edge-size").get_uint32();
-        });
-        settings.connect("changed::edge-size", () => {
-            edgeSizeResetButton.visible = settings.get_uint("edge-size") != settings.get_default_value("edge-size").get_uint32();
-        });
-        edgeSizeBox.append(edgeSizeResetButton);
-        const edgeSizeSpinner = new Gtk.SpinButton({
-            adjustment: new Gtk.Adjustment({
-                lower: 1,
-                upper: 100,
-                step_increment: 10,
-            }),
-        });
-        settings.bind("edge-size", edgeSizeSpinner, "value", Gio.SettingsBindFlags.DEFAULT);
-        edgeSizeRow.activatable_widget = edgeSizeSpinner;
-        edgeSizeBox.append(edgeSizeSpinner);
-        const edgeSizeUnit = new Gtk.Label({
-            label: " %",
-            width_chars: "3",
-            xalign: 1.0,
-            justify: Gtk.Justification.RIGHT,
-        });
-        edgeSizeBox.append(edgeSizeUnit);
-        positionGroup.add(edgeSizeRow);
+        this.buildSpinRow("edge-size", "Edge Size", "%", positionGroup, edgeSizeAdjustment);
 
         // primary-monitor-only
         const primaryMonitorOnlyRow = new Adw.SwitchRow({
             title: "Only on Primary Monitor",
         });
-        settings.bind("primary-monitor-only", primaryMonitorOnlyRow, "active", Gio.SettingsBindFlags.DEFAULT);
+        this.settings.bind("primary-monitor-only", primaryMonitorOnlyRow, "active", Gio.SettingsBindFlags.DEFAULT);
         positionGroup.add(primaryMonitorOnlyRow);
 
-        if (settings.get_boolean("fallback-in-use")) {
+        if (this.settings.get_boolean("fallback-in-use")) {
             // fallback-timeout
-            const timeoutRow = new Adw.ActionRow({
-                title: "Activation Timeout",
+            let timeoutAdjustment = new Gtk.Adjustment({
+                lower: 1,
+                upper: 1000,
+                step_increment: 50,
             });
-            timeoutRow.add_css_class("spin");
-            const timeoutBox = new Gtk.Box({
-                orientation: Gtk.Orientation.HORIZONTAL,
-            });
-            timeoutRow.add_suffix(timeoutBox);
-            const timeoutResetButton = new Gtk.Button({
-                icon_name: "view-refresh-symbolic",
-                tooltip_text: "Reset to default",
-                valign: Gtk.Align.CENTER,
-                hexpand: false,
-                vexpand: false
-            });
-            timeoutResetButton.add_css_class("flat");
-            timeoutResetButton.connect("clicked", () => {
-                settings.reset("fallback-timeout");
-            });
-            timeoutResetButton.connect("map", () => {
-                timeoutResetButton.visible = settings.get_uint("fallback-timeout") != settings.get_default_value("fallback-timeout").get_uint32();
-            });
-            settings.connect("changed::fallback-timeout", () => {
-                timeoutResetButton.visible = settings.get_uint("fallback-timeout") != settings.get_default_value("fallback-timeout").get_uint32();
-            });
-            timeoutBox.append(timeoutResetButton);
-            const timeoutSpinner = new Gtk.SpinButton({
-                adjustment: new Gtk.Adjustment({
-                    lower: 0,
-                    upper: 1000,
-                    step_increment: 50,
-                }),
-            });
-            settings.bind("fallback-timeout", timeoutSpinner, "value", Gio.SettingsBindFlags.DEFAULT);
-            timeoutRow.activatable_widget = timeoutSpinner;
-            timeoutBox.append(timeoutSpinner);
-            const timeoutUnit = new Gtk.Label({
-                label: " ms",
-                width_chars: "3",
-                xalign: 1.0,
-                justify: Gtk.Justification.RIGHT,
-            });
-            timeoutBox.append(timeoutUnit);
-            behaviorGroup.add(timeoutRow);
+            this.buildSpinRow("fallback-timeout", "Activation Timeout", "ms", behaviorGroup, timeoutAdjustment);
         } else {
             // pressure-threshold
-            const pressureRow = new Adw.ActionRow({
-                title: "Activation Pressure",
+            let pressureAdjustment = new Gtk.Adjustment({
+                lower: 0,
+                upper: 500,
+                step_increment: 25,
             });
-            pressureRow.add_css_class("spin");
-            const pressureBox = new Gtk.Box({
-                orientation: Gtk.Orientation.HORIZONTAL,
-            });
-            pressureRow.add_suffix(pressureBox);
-            const pressureResetButton = new Gtk.Button({
-                icon_name: "view-refresh-symbolic",
-                tooltip_text: "Reset to default",
-                valign: Gtk.Align.CENTER,
-                hexpand: false,
-                vexpand: false
-            });
-            pressureResetButton.add_css_class("flat");
-            pressureResetButton.connect("clicked", () => {
-                settings.reset("pressure-threshold");
-            });
-            pressureResetButton.connect("map", () => {
-                pressureResetButton.visible = settings.get_uint("pressure-threshold") != settings.get_default_value("pressure-threshold").get_uint32();
-            });
-            settings.connect("changed::pressure-threshold", () => {
-                pressureResetButton.visible = settings.get_uint("pressure-threshold") != settings.get_default_value("pressure-threshold").get_uint32();
-            });
-            pressureBox.append(pressureResetButton);
-            const pressureSpinner = new Gtk.SpinButton({
-                adjustment: new Gtk.Adjustment({
-                    lower: 0,
-                    upper: 500,
-                    step_increment: 25,
-                }),
-            });
-            settings.bind("pressure-threshold", pressureSpinner, "value", Gio.SettingsBindFlags.DEFAULT);
-            pressureRow.activatable_widget = pressureSpinner;
-            pressureBox.append(pressureSpinner);
-            const pressureUnit = new Gtk.Label({
-                label: " px",
-                width_chars: "3",
-                xalign: 1.0,
-                justify: Gtk.Justification.RIGHT,
-            });
-            pressureBox.append(pressureUnit);
-            behaviorGroup.add(pressureRow);
+            this.buildSpinRow("pressure-threshold", "Activation Pressure", "px", behaviorGroup, pressureAdjustment);
         }
 
         // suppress-activation-when-button-held
@@ -199,7 +86,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
             subtitle: "Don't activate overview while a mouse button is held",
             show_enable_switch: true,
         });
-        settings.bind(
+        this.settings.bind(
             "suppress-activation-when-button-held",
             suppressWhenButtonHeldRow,
             "enable-expansion",
@@ -211,7 +98,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         const suppressButtonOptionLeft = new Adw.SwitchRow({
             title: "Left Mouse Button",
         });
-        settings.bind(
+        this.settings.bind(
             "suppress-button-option-left",
             suppressButtonOptionLeft,
             "active",
@@ -223,7 +110,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         const suppressButtonOptionRight = new Adw.SwitchRow({
             title: "Right Mouse Button",
         });
-        settings.bind(
+        this.settings.bind(
             "suppress-button-option-right",
             suppressButtonOptionRight,
             "active",
@@ -235,7 +122,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         const suppressButtonOptionMiddle = new Adw.SwitchRow({
             title: "Middle Mouse Button",
         });
-        settings.bind(
+        this.settings.bind(
             "suppress-button-option-middle",
             suppressButtonOptionMiddle,
             "active",
@@ -248,7 +135,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
             title: "Suppress on Fullscreen",
             subtitle: "Don't activate overview while an application is displayed in fullscreen mode",
         });
-        settings.bind(
+        this.settings.bind(
             "suppress-activation-when-fullscreen",
             suppressWhenFullscreenRow,
             "active",
@@ -260,7 +147,57 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         const showAnimationRow = new Adw.SwitchRow({
             title: "Show Animation when Activated",
         });
-        settings.bind("show-animation", showAnimationRow, "active", Gio.SettingsBindFlags.DEFAULT);
+        this.settings.bind("show-animation", showAnimationRow, "active", Gio.SettingsBindFlags.DEFAULT);
         appearanceGroup.add(showAnimationRow);
+    }
+
+    buildSpinRow(preferenceKey, title, unit, group, adjustment) {
+        const row = new Adw.ActionRow({
+            title: title,
+        });
+        row.add_css_class("spin");
+
+        const box = new Gtk.Box({
+            orientation: Gtk.Orientation.HORIZONTAL,
+        });
+        row.add_suffix(box);
+
+        const resetButton = new Gtk.Button({
+            icon_name: "view-refresh-symbolic",
+            tooltip_text: "Reset to default",
+            valign: Gtk.Align.CENTER,
+            hexpand: false,
+            vexpand: false
+        });
+        resetButton.add_css_class("flat");
+        resetButton.connect("clicked", () => {
+            this.settings.reset(preferenceKey);
+        });
+        resetButton.connect("map", () => {
+            resetButton.visible =
+                this.settings.get_uint(preferenceKey) != this.settings.get_default_value(preferenceKey).get_uint32();
+        });
+        this.settings.connect("changed::".concat(preferenceKey), () => {
+            resetButton.visible =
+                this.settings.get_uint(preferenceKey) != this.settings.get_default_value(preferenceKey).get_uint32();
+        });
+
+        box.append(resetButton);
+        const spinner = new Gtk.SpinButton({
+            adjustment: adjustment,
+        });
+        this.settings.bind(preferenceKey, spinner, "value", Gio.SettingsBindFlags.DEFAULT);
+        row.activatable_widget = spinner;
+        box.append(spinner);
+
+        const unitLabel = new Gtk.Label({
+            label: unit,
+            width_chars: "3",
+            xalign: 1.0,
+            justify: Gtk.Justification.RIGHT,
+        });
+        box.append(unitLabel);
+
+        group.add(row);
     }
 }
