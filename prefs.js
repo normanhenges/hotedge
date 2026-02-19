@@ -47,17 +47,32 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         });
         page.add(appearanceGroup);
 
-        // edge-size
-        const edgeSizeRow = new Adw.SpinRow({
+        const edgeSizeRow = new Adw.ActionRow({
             title: "Edge Size",
             subtitle: "% of display width (default is 100 %)",
+        });
+        edgeSizeRow.add_css_class("spin");
+        const edgeSizeBox = new Gtk.Box({
+            orientation: Gtk.Orientation.HORIZONTAL,
+        });
+        edgeSizeRow.add_suffix(edgeSizeBox);
+        const edgeSizeSpinner = new Gtk.SpinButton({
             adjustment: new Gtk.Adjustment({
                 lower: 1,
                 upper: 100,
                 step_increment: 10,
             }),
         });
-        settings.bind("edge-size", edgeSizeRow, "value", Gio.SettingsBindFlags.DEFAULT);
+        settings.bind("edge-size", edgeSizeSpinner, "value", Gio.SettingsBindFlags.DEFAULT);
+        edgeSizeRow.activatable_widget = edgeSizeSpinner;
+        edgeSizeBox.append(edgeSizeSpinner);
+        const edgeSizeUnit = new Gtk.Label({
+            label: " %",
+            width_chars: "3",
+            xalign: 1.0,
+            justify: Gtk.Justification.RIGHT,
+        });
+        edgeSizeBox.append(edgeSizeUnit);
         positionGroup.add(edgeSizeRow);
 
         // primary-monitor-only
@@ -69,29 +84,61 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         if (settings.get_boolean("fallback-in-use")) {
             // fallback-timeout
-            const timeoutRow = new Adw.SpinRow({
+            const timeoutRow = new Adw.ActionRow({
                 title: "Activation Timeout",
                 subtitle: "milliseconds (default is 250 ms)",
+            });
+            timeoutRow.add_css_class("spin");
+            const timeoutBox = new Gtk.Box({
+                orientation: Gtk.Orientation.HORIZONTAL,
+            });
+            timeoutRow.add_suffix(timeoutBox);
+            const timeoutSpinner = new Gtk.SpinButton({
                 adjustment: new Gtk.Adjustment({
                     lower: 0,
                     upper: 1000,
                     step_increment: 50,
                 }),
             });
-            settings.bind("fallback-timeout", timeoutRow, "value", Gio.SettingsBindFlags.DEFAULT);
+            settings.bind("fallback-timeout", timeoutSpinner, "value", Gio.SettingsBindFlags.DEFAULT);
+            timeoutRow.activatable_widget = timeoutSpinner;
+            timeoutBox.append(timeoutSpinner);
+            const timeoutUnit = new Gtk.Label({
+                label: " ms",
+                width_chars: "3",
+                xalign: 1.0,
+                justify: Gtk.Justification.RIGHT,
+            });
+            timeoutBox.append(timeoutUnit);
             behaviorGroup.add(timeoutRow);
         } else {
             // pressure-threshold
-            const pressureRow = new Adw.SpinRow({
+            const pressureRow = new Adw.ActionRow({
                 title: "Activation Pressure",
                 subtitle: "pixels (default is 150 px)",
+            });
+            pressureRow.add_css_class("spin");
+            const pressureBox = new Gtk.Box({
+                orientation: Gtk.Orientation.HORIZONTAL,
+            });
+            pressureRow.add_suffix(pressureBox);
+            const pressureSpinner = new Gtk.SpinButton({
                 adjustment: new Gtk.Adjustment({
                     lower: 0,
                     upper: 500,
                     step_increment: 25,
                 }),
             });
-            settings.bind("pressure-threshold", pressureRow, "value", Gio.SettingsBindFlags.DEFAULT);
+            settings.bind("pressure-threshold", pressureSpinner, "value", Gio.SettingsBindFlags.DEFAULT);
+            pressureRow.activatable_widget = pressureSpinner;
+            pressureBox.append(pressureSpinner);
+            const pressureUnit = new Gtk.Label({
+                label: " px",
+                width_chars: "3",
+                xalign: 1.0,
+                justify: Gtk.Justification.RIGHT,
+            });
+            pressureBox.append(pressureUnit);
             behaviorGroup.add(pressureRow);
         }
 
