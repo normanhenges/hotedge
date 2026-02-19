@@ -55,6 +55,24 @@ export default class HotEdgePreferences extends ExtensionPreferences {
             orientation: Gtk.Orientation.HORIZONTAL,
         });
         edgeSizeRow.add_suffix(edgeSizeBox);
+        const edgeSizeResetButton = new Gtk.Button({
+            icon_name: "view-refresh-symbolic",
+            tooltip_text: "Reset to default",
+            valign: Gtk.Align.CENTER,
+            hexpand: false,
+            vexpand: false
+        });
+        edgeSizeResetButton.add_css_class("flat");
+        edgeSizeResetButton.connect("clicked", () => {
+            settings.reset("edge-size");
+        });
+        edgeSizeResetButton.connect("map", () => {
+            edgeSizeResetButton.visible = settings.get_uint("edge-size") != settings.get_default_value("edge-size").get_uint32();
+        });
+        settings.connect("changed::edge-size", () => {
+            edgeSizeResetButton.visible = settings.get_uint("edge-size") != settings.get_default_value("edge-size").get_uint32();
+        });
+        edgeSizeBox.append(edgeSizeResetButton);
         const edgeSizeSpinner = new Gtk.SpinButton({
             adjustment: new Gtk.Adjustment({
                 lower: 1,
