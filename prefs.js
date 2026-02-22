@@ -81,7 +81,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         }
 
         // suppress-activation-when-button-held
-        const suppressWhenButtonHeldRow = new Adw.ExpanderRow({
+        const suppressWhenButtonHeldRow = new Adw.SwitchRow({
             title: "Suppress on Mouse Button",
             subtitle: "Don't activate overview while a mouse button is held",
         });
