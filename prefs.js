@@ -79,54 +79,17 @@ export default class HotEdgePreferences extends ExtensionPreferences {
         behaviorGroup.add(edgeSizeRow);
 
         // suppress-activation-when-button-held
-        const suppressWhenButtonHeldRow = new Adw.ExpanderRow({
+        const suppressWhenButtonHeldRow = new Adw.SwitchRow({
             title: "Suppress on mouse button",
             subtitle: "Don't activate overview while a mouse button is held",
-            show_enable_switch: true,
         });
         settings.bind(
             "suppress-activation-when-button-held",
             suppressWhenButtonHeldRow,
-            "enable-expansion",
+            "active",
             Gio.SettingsBindFlags.DEFAULT,
         );
         behaviorGroup.add(suppressWhenButtonHeldRow);
-
-        // suppress-button-option-left
-        const suppressButtonOptionLeft = new Adw.SwitchRow({
-            title: "Left mouse button",
-        });
-        settings.bind(
-            "suppress-button-option-left",
-            suppressButtonOptionLeft,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        );
-        suppressWhenButtonHeldRow.add_row(suppressButtonOptionLeft);
-
-        // suppress-button-option-right
-        const suppressButtonOptionRight = new Adw.SwitchRow({
-            title: "Right mouse button",
-        });
-        settings.bind(
-            "suppress-button-option-right",
-            suppressButtonOptionRight,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        );
-        suppressWhenButtonHeldRow.add_row(suppressButtonOptionRight);
-
-        // suppress-button-option-middle
-        const suppressButtonOptionMiddle = new Adw.SwitchRow({
-            title: "Middle mouse button",
-        });
-        settings.bind(
-            "suppress-button-option-middle",
-            suppressButtonOptionMiddle,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT,
-        );
-        suppressWhenButtonHeldRow.add_row(suppressButtonOptionMiddle);
 
         // suppress-activation-when-fullscreen
         const suppressWhenFullscreenRow = new Adw.SwitchRow({

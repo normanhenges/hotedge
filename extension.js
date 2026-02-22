@@ -129,13 +129,11 @@ const HotEdge = GObject.registerClass(
             this._edgeSize = this._settings.get_uint("edge-size") / 100;
 
             this._suppressActivationWhenButtonHeld = this._settings.get_boolean("suppress-activation-when-button-held");
-            this._suppressButtonOptionLeft = this._settings.get_boolean("suppress-button-option-left");
-            this._suppressButtonOptionRight = this._settings.get_boolean("suppress-button-option-right");
-            this._suppressButtonOptionMiddle = this._settings.get_boolean("suppress-button-option-middle");
-            this._ignoredButtons = [];
-            if (this._suppressButtonOptionLeft) this._ignoredButtons.push(Clutter.ModifierType.BUTTON1_MASK);
-            if (this._suppressButtonOptionRight) this._ignoredButtons.push(Clutter.ModifierType.BUTTON2_MASK);
-            if (this._suppressButtonOptionMiddle) this._ignoredButtons.push(Clutter.ModifierType.BUTTON3_MASK);
+            this._ignoredButtons = [
+                Clutter.ModifierType.BUTTON1_MASK,
+                Clutter.ModifierType.BUTTON2_MASK,
+                Clutter.ModifierType.BUTTON3_MASK,
+            ];
 
             this._suppressActivationWhenFullscreen = this._settings.get_boolean("suppress-activation-when-fullscreen");
             this._showAnimation = this._settings.get_boolean("show-animation");
