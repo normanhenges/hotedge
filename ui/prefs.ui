@@ -153,25 +153,9 @@
           </object>
         </child>
         <child>
-          <object class="AdwExpanderRow">
+          <object class="AdwSwitchRow">
             <property name="title" translatable="yes">Suppress on Mouse Button</property>
             <property name="subtitle" translatable="yes">Don't activate overview while a mouse button is held</property>
-            <property name="show-enable-switch">true</property>
-            <child>
-              <object class="AdwSwitchRow">
-                <property name="title" translatable="yes">Left Mouse Button</property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwSwitchRow">
-                <property name="title" translatable="yes">Right Mouse Button</property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwSwitchRow">
-                <property name="title" translatable="yes">Middle Mouse Button</property>
-              </object>
-            </child>
           </object>
         </child>
         <child>
