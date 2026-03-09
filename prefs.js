@@ -82,7 +82,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // suppress-activation-when-button-held
         const suppressWhenButtonHeldRow = new Adw.SwitchRow({
-            title: "Suppress on mouse button",
+            title: "Suppress on Mouse Button",
             subtitle: "Don't activate overview while a mouse button is held",
         });
         this.settings.bind(
@@ -95,7 +95,7 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // suppress-activation-when-fullscreen
         const suppressWhenFullscreenRow = new Adw.SwitchRow({
-            title: "Suppress on fullscreen",
+            title: "Suppress on Fullscreen",
             subtitle: "Don't activate overview while an application is displayed in fullscreen mode",
         });
         this.settings.bind(
