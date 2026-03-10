@@ -76,11 +76,13 @@ export default class HotEdgePreferences extends ExtensionPreferences {
 
         // Decide whether to show timeout or pressure
         const fallbackInUse = settings.get_boolean("fallback-in-use");
-        builder.get_object("timeout_row").connect("map", () => {
-            button.visible = fallbackInUse;
+        const timeoutRow = builder.get_object("timeout_row");
+        timeoutRow.connect("map", () => {
+            timeoutRow.visible = fallbackInUse;
         });
-        builder.get_object("pressure_row").connect("map", () => {
-            button.visible = !fallbackInUse;
+        const pressureRow = builder.get_object("pressure_row");
+        pressureRow.connect("map", () => {
+            pressureRow.visible = !fallbackInUse;
         });
 
         // Appearance
