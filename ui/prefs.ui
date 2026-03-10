@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <object class="AdwPreferencesPage">
+  <object class="AdwPreferencesPage" id="preferences_main_page">
     <property name="title" translatable="yes">General</property>
     <property name="icon-name">dialog-information-symbolic</property>
     <child>
@@ -53,7 +53,7 @@
           </object>
         </child>
         <child>
-          <object class="AdwSwitchRow">
+          <object class="AdwSwitchRow" id="primary_monitor_only_switch">
             <property name="title" translatable="yes">Only on Primary Monitor</property>
           </object>
         </child>
@@ -63,7 +63,7 @@
       <object class="AdwPreferencesGroup">
         <property name="title" translatable="yes">Behavior</property>
         <child>
-          <object class="AdwActionRow">
+          <object class="AdwActionRow" id="timeout_row">
             <property name="title" translatable="yes">Activation Timeout</property>
             <property name="activatable-widget">timeout_spin_button</property>
             <style>
@@ -108,7 +108,7 @@
           </object>
         </child>
         <child>
-          <object class="AdwActionRow">
+          <object class="AdwActionRow" id="pressure_row">
             <property name="title" translatable="yes">Activation Pressure</property>
             <property name="activatable-widget">pressure_spin_button</property>
             <style>
@@ -153,13 +153,13 @@
           </object>
         </child>
         <child>
-          <object class="AdwSwitchRow">
+          <object class="AdwSwitchRow" id="suppress_on_mouse_switch">
             <property name="title" translatable="yes">Suppress on Mouse Button</property>
             <property name="subtitle" translatable="yes">Don't activate overview while a mouse button is held</property>
           </object>
         </child>
         <child>
-          <object class="AdwSwitchRow">
+          <object class="AdwSwitchRow" id="suppress_on_fullscreen_switch">
             <property name="title" translatable="yes">Suppress on Fullscreen</property>
             <property name="subtitle" translatable="yes">Don't activate overview while an application is displayed in fullscreen mode</property>
           </object>
@@ -170,7 +170,7 @@
       <object class="AdwPreferencesGroup">
         <property name="title" translatable="yes">Appearance</property>
         <child>
-          <object class="AdwSwitchRow">
+          <object class="AdwSwitchRow" id="show_animation_switch">
             <property name="title" translatable="yes">Show Ripple Animation when Activated</property>
           </object>
         </child>
